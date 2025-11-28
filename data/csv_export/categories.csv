@@ -1,0 +1,174 @@
+id,name
+60b71f4d-9030-4a5e-a522-4fde768c132b,Accounting
+908ff4b3-66ff-47fc-9536-87bbfbfb1b2d,Acoustics and Ultrasonics
+c5693669-73d5-4e3d-a6ce-1df2c8fcbcdf,Aerospace Engineering
+dbce81d2-623c-4b9c-8689-087d65fac785,Agricultural and Biological Sciences (miscellaneous)
+80b65bb5-466e-463a-9321-027de4969fcd,Algebra and Number Theory
+d88a0c9e-8067-4734-8415-f2bae6eec975,Analysis
+6d5f3001-441e-43a6-9b58-23a52425134f,Anesthesiology and Pain Medicine
+ef152468-0e74-4d07-a702-8332b8f9dffd,Anthropology
+73263924-7012-4faf-a550-e3f3946edd18,Applied Mathematics
+826ad390-37d5-40c7-a6bd-5274383ca86d,Applied Microbiology and Biotechnology
+3aa4461e-8855-4baa-9efd-43554b71dd89,Artificial Intelligence
+eb294fd0-0e11-47b4-9cec-2cb149898063,Arts and Humanities (miscellaneous)
+48490f30-587b-4f2e-8000-a00d618fe124,Astronomy and Astrophysics
+ac3f4d74-1fc9-46f0-a7b2-01f1762e7961,"Atomic and Molecular Physics, and Optics"
+e8388ac8-714e-47a7-8339-83d809dfce0f,Automotive Engineering
+25be20b4-4f96-4b75-b8eb-0334b8df027d,Biochemistry
+83cd7f8e-28b4-4167-9e3e-de18320eeb83,"Biochemistry, Genetics and Molecular Biology (miscellaneous)"
+96a6409b-a426-4bba-aae1-abf49a4d4496,Bioengineering
+2b535eb7-82e5-41b0-b6c6-35b687dcd45e,Biomaterials
+220f2948-1f48-4228-ad8f-d6e0562da9fa,Biomedical Engineering
+74470e73-4e29-4b7f-8af3-f7287b5f559a,Biophysics
+2d3c75ea-30eb-4cdf-81cf-8fa271fde37b,Biotechnology
+0be99a82-f48e-4d51-a116-f3d63134355f,Building and Construction
+7f42fb24-a372-4b15-b58a-fbafe3583d0d,Business and International Management
+7c3e7afd-f498-4cb4-b5b9-7961ffbf712b,"Business, Management and Accounting (miscellaneous)"
+cc996f39-ebe6-430a-a4d2-1f49d18ed0dc,Cancer Research
+a72c4e14-ec98-4b51-a9bb-0243bf8088f2,Cardiology and Cardiovascular Medicine
+927272c1-2e38-4ddf-83ff-0087e074f01c,Catalysis
+1a9baa20-5434-41e6-a97a-3a704286d50d,Cell Biology
+6f36769a-0d20-4826-bd0d-b77266320a47,Cellular and Molecular Neuroscience
+2edf0f08-4e87-4241-b8a6-514c1b4375e8,Ceramics and Composites
+14d17a67-1f33-4ae4-b5c9-d4044bf65d86,Chemistry (miscellaneous)
+8a2ce4b2-1513-42d9-97b8-76c9b218a703,Civil and Structural Engineering
+8ae54418-f5f2-4110-87a6-0b7e1099a395,Complementary and Alternative Medicine
+e6ac5081-de52-47d9-8715-3729fb0722e9,Computational Mathematics
+4ca837dd-4e90-4183-a22c-74186a97943b,Computational Mechanics
+d07a42ee-200e-471c-9906-da9ce75a7f9b,Computational Theory and Mathematics
+c27d1b0f-e226-4cf1-bf42-36c0515ff692,Computer Graphics and Computer-Aided Design
+8d6d33bc-b69a-4cf3-8e3e-8ed181223ccb,Computer Networks and Communications
+816be0ac-d618-4717-9376-a8bbe067174c,Computer Science (miscellaneous)
+c42c0046-6ecf-41a8-89ba-e6cc1bb627b5,Computer Science Applications
+085546c0-031d-4a43-8dde-9cc2caf23db8,Computer Vision and Pattern Recognition
+9de113d4-d671-45f5-abd4-3a71785557fb,Condensed Matter Physics
+989847bd-22ef-44b9-8b23-b6d4168ec57b,Control and Optimization
+ee72988d-9088-473f-a205-25eeccc61ba0,Control and Systems Engineering
+c776af62-c43d-4339-be2e-f57293732ef7,Critical Care and Intensive Care Medicine
+fd29cdda-eed4-4ded-973f-1970d6d40651,Cultural Studies
+3a605756-2068-478b-aa1e-f73dc3e28e7a,Dermatology
+81fc97ab-73d6-4f77-8265-2db36c713ab5,Development
+ee84ae70-93ae-4760-8acd-956964b80319,Discrete Mathematics and Combinatorics
+993a149f-72b5-48da-9ccd-2a7433b6f9c0,Ecological Modeling
+f4ad9a84-61c0-4bbc-be1b-d0f193484d49,Ecology
+fc8d1a63-34c1-4118-b424-efe6689dea3f,"Ecology, Evolution, Behavior and Systematics"
+9862f504-c7bc-4e94-b224-8cbae76b1003,Economics and Econometrics
+c1296baf-c16a-4199-b53d-ffb1084f1ad5,"Economics, Econometrics and Finance (miscellaneous)"
+d138c936-c6ce-4f77-8b93-1fc92fc28695,Education
+dc2f6346-44de-4da1-866b-6080b07063ca,Electrical and Electronic Engineering
+17f4c9a5-9a2c-4111-b1b1-2f5548e09cff,"Electronic, Optical and Magnetic Materials"
+07178153-3723-47a7-8b7a-4df48d411618,Emergency Medicine
+74a358d6-bc1e-4a49-a74e-02e7fcefeec0,"Endocrinology, Diabetes and Metabolism"
+a793ccf2-f4cc-4392-b558-d28edcada00e,Energy (miscellaneous)
+89695a05-43bd-46d9-9b0f-458edaccaa30,Energy Engineering and Power Technology
+56da288b-5094-451a-97d0-328bd922b1b9,Engineering (miscellaneous)
+ea46075b-fab5-45cb-834f-b47b2c1e3468,Environmental Chemistry
+bd4e1a26-d611-495b-950a-8908bbb96278,Environmental Engineering
+ae370316-e3cf-4194-a77c-ff5c81378137,Environmental Science (miscellaneous)
+2b0a3717-4b4d-441c-93cd-f0cac6f0911f,Epidemiology
+21b8575e-6153-4610-8a8b-7b8d035cff64,Family Practice
+753bed76-0e7d-4ba1-baa1-e32e7eaa1261,Finance
+a54b2a7e-2bdb-44d9-976e-e7bd81ecb34c,Fluid Flow and Transfer Processes
+ac647ab1-1452-42f1-940c-0308501238c3,Food Science
+0dabb0b2-b638-4dd4-a2f1-b72e150295bc,Fuel Technology
+82233627-aca8-449c-9e02-c967fe270e32,Fundamentals and Skills
+6b121c0d-b0a7-4713-a481-2e51ffdc4e9b,Gastroenterology
+f28b7341-81e4-4d22-bbf2-d60d42a63489,Genetics
+68e7681b-d9d6-457e-a84b-6cf9e8b50844,Genetics (clinical)
+7c695a12-b837-47d6-8a5d-a6520c636785,"Geography, Planning and Development"
+ee525e33-2b12-4ec5-a84c-8224f20a2b9d,Geometry and Topology
+ccc86212-f927-4685-a8b2-0e439a6f9132,Geophysics
+0e4b9704-15c9-4a06-be7d-aea56bfa1d46,Geotechnical Engineering and Engineering Geology
+0b114a81-4bd5-4d34-bc5c-ed3155727e9a,Global and Planetary Change
+707a987e-3558-4795-9aaa-955c7e4c3b78,Hardware and Architecture
+9630a3e2-314a-490c-93ae-280588916558,Health (social science)
+7c3b2c35-d850-4426-b7f9-179ce6bc387e,Health Informatics
+73bb5823-a0dc-4058-9715-da9b976346f7,Health Information Management
+2291fbf6-09f6-4073-9b66-0b0242a8cfc9,Health Policy
+259a6106-6006-4ec2-a2e9-a297bc39874f,Hepatology
+a3aba8c0-1b68-4419-ba6b-dadb524ff2ec,History
+d1f979a0-398d-4e05-a4c0-9f0d9ec19953,Human-Computer Interaction
+85171e5a-4d50-4365-a749-b9b0760f3377,Immunology
+21d49e7a-4343-40de-a43b-2de5b20d7227,Immunology and Allergy
+cc326c50-3bda-4094-bddc-1db9d5806ad3,Immunology and Microbiology (miscellaneous)
+f1551373-19ac-4fe3-b323-0b50e7d43f48,Industrial and Manufacturing Engineering
+9c5f849e-6a51-4c5b-bd26-4a36cf0d7157,Infectious Diseases
+3f44c8a4-f881-4cb9-84e9-1996b1145565,Information Systems
+f4e07c1e-dc45-4b8e-944b-e2ee149b0065,Insect Science
+05502c08-5fb8-4243-83f0-ad139907fea8,Instrumentation
+fe8465a8-5c2c-4d52-8293-8ba286715b49,"Issues, Ethics and Legal Aspects"
+df0452e4-257a-4e29-afe7-87b3b80c8990,Leadership and Management
+a68a3e42-5ff5-475c-a72f-4294146346ab,Library and Information Sciences
+d9adb0bb-6703-4092-9783-d30262fc314e,Linguistics and Language
+c95ecb1b-7442-440c-b3cd-b6c0cb13250c,Logic
+1c7eb952-885a-4c65-96e4-5205c624a393,Management Science and Operations Research
+6b4e202b-7d50-40c2-82f8-6ff8f586825b,Management of Technology and Innovation
+0ab24569-6f00-4c14-a8e8-05b085bc8dbf,"Management, Monitoring, Policy and Law"
+5f62e9e5-8558-45d5-9437-1b8b93f6cc5b,Marketing
+78ca5233-d74e-4b66-94b9-7661f7bedac0,Materials Chemistry
+54622b0f-73c2-4ce9-a5b2-9a19d48a0cd4,Materials Science (miscellaneous)
+30e51f8a-4bb1-4ae1-ae85-c9d5de51e719,Mathematical Physics
+c3457945-0753-490d-9c73-1059e296d5a9,Mathematics (miscellaneous)
+7ffef889-5a0f-40e4-bfce-ef607957ed3b,Mechanical Engineering
+d1f38388-aa7c-4869-b7c5-4141e7717594,Mechanics of Materials
+2819f992-68b1-4025-9fac-076401886235,Medical and Surgical Nursing
+cb42192b-1e34-407b-bf1f-94746e393a4f,Medicine (miscellaneous)
+900da46e-cda5-43f8-b55d-f54393ddc244,Microbiology
+64567f2c-f0fe-4624-bc7e-bfb57dfa98bc,Microbiology (medical)
+059dda06-fd3f-4d6e-b759-f4a84f8cb156,Modeling and Simulation
+68c89766-1cf4-444e-bc62-7aa19d78d911,Molecular Biology
+b4d54498-f803-42ac-b523-aa98d6f45607,Molecular Medicine
+09cd5b56-c84d-4a43-8eca-043dfab90531,Multidisciplinary
+d797cb2b-163a-45ce-950d-05c596ffb8c0,Nanoscience and Nanotechnology
+991a8bf6-d90e-4f39-9ef9-93cffc6eb2d2,Neurology
+2cada22d-baab-4c97-a997-b1d3da959f0a,Neurology (clinical)
+e8ea1205-1c28-4455-9021-8a6aa8ff633d,Nuclear Energy and Engineering
+4ef8c87a-dbcb-457c-920d-8d888df29763,Nuclear and High Energy Physics
+f64f55b1-95d9-48dd-a08a-8c675bced1bf,Numerical Analysis
+50ca2152-2dd7-4614-ab43-14b260c96d7b,Nutrition and Dietetics
+76f9caa8-d0f6-4958-8005-6254da1dd419,Obstetrics and Gynecology
+475f024f-dc88-4010-9550-89c822847def,Ocean Engineering
+a031572a-00f9-4a91-b025-ff6498091ac8,Oceanography
+158a7a30-8720-40eb-91b6-127ff0a4382a,Oncology
+f9cf4ba5-c980-4707-8af0-635a84b48635,Oncology (nursing)
+9181a701-1e1a-4ba6-bfe3-47c12bda887b,Ophthalmology
+24dd2b6f-4b5b-4f66-99c5-5180449496e7,Organizational Behavior and Human Resource Management
+3f3eebdc-1efd-459c-8beb-10ceb55d4131,Orthopedics and Sports Medicine
+28a9e873-9b13-401f-b97a-814aa1a1fb12,Parasitology
+111e9f39-b527-4120-9fe0-22ba311e5f32,Pathology and Forensic Medicine
+51ce0d89-159c-4d48-af6d-97fbd4b12fde,"Pediatrics, Perinatology and Child Health"
+a38ce772-355e-4507-93fe-2e16c617da16,Pharmaceutical Science
+182a9677-2675-45eb-a603-2a2f1b0b6231,Pharmacology
+6c1cee6e-acaa-4b1b-87c2-1e916794bfcc,Pharmacology (medical)
+c29f0354-8897-442b-bd7a-814de40bd3bc,Philosophy
+ba1793f9-eb23-4f02-9b55-575cb3dfdd11,"Physical Therapy, Sports Therapy and Rehabilitation"
+02737d8c-0e23-41a2-8820-3da84cacc71d,Physical and Theoretical Chemistry
+a2f1c12f-6467-4352-833e-0653fb34efb7,Physics and Astronomy (miscellaneous)
+7dd2a499-6908-4e79-8e6e-5843e39a4161,Physiology
+3f3cef1e-40bc-49e0-bafd-d0669c36911c,Political Science and International Relations
+129097e2-dcc2-44c1-9d01-2e8f850e3f62,Polymers and Plastics
+4505dccb-2084-4931-bc56-510266ad8dc8,Psychiatry and Mental Health
+4f050b48-6187-4b10-b64b-5c2bd18ecd67,"Public Health, Environmental and Occupational Health"
+4fedde53-0457-4a2c-88e7-cae086b5d402,Pulmonary and Respiratory Medicine
+3444b5ee-6180-438e-905e-b9ca4107a9c5,"Renewable Energy, Sustainability and the Environment"
+86d2360e-6597-4698-ac2c-6e59360e51b4,Reproductive Medicine
+1cb2b27a-3339-402b-8ae4-41264dc387e5,Rheumatology
+3d899d43-e5cf-4bb5-8bb2-36ec0f507f6e,"Safety, Risk, Reliability and Quality"
+28a0d817-54ba-476d-a7bf-70113b52d073,Sensory Systems
+982fdaab-8bca-4a62-beb5-1c6737ff432a,Signal Processing
+7e1b47f0-7e29-47d1-b63c-e09743f74426,Sociology and Political Science
+584833d1-3592-405a-8f52-631706bfb953,Software
+64992552-6641-4bff-a907-d184f0229c6e,Space and Planetary Science
+a5c2611c-9512-4175-bc84-14628cd035c6,Sports Science
+924626d7-8dc7-4363-bcae-f7090f6f7a51,Statistical and Nonlinear Physics
+9c15c592-7938-4fcf-a422-bf92f253347d,Statistics and Probability
+d1010873-d72a-4f2a-ac45-4a8deff446d9,"Statistics, Probability and Uncertainty"
+17d4686e-7b15-46aa-a1fc-9ab724f7e7cf,Strategy and Management
+1157f092-0103-466f-a898-4751865b0e8f,Surfaces and Interfaces
+88c0bb6b-7e0f-466e-ac17-2363764812b8,"Surfaces, Coatings and Films"
+a7a60b97-b9f7-4821-bb25-521fc9004a3b,Surgery
+af2d289b-cdaf-419b-a9be-05314ae4d505,Theoretical Computer Science
+3e7ae122-5011-469b-80b4-4d3e80e9931d,Urban Studies
+8ac41c36-1a15-4aee-a423-1c932f57fa78,Virology
+58f4f76f-03b5-420f-912c-27c1d3b7e303,Waste Management and Disposal
+752b3ab9-9f42-42f4-a3fb-b15d5724f9d5,Water Science and Technology
