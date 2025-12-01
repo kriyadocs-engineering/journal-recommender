@@ -1,4 +1,12 @@
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import pg from 'pg';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '../../.env') });
+
 const { Pool } = pg;
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -20,9 +28,9 @@ pool.on('error', (err) => {
   process.exit(-1);
 });
 
-export async function query<T = any>(text: string, params?: any[]): Promise<pg.QueryResult<T>> {
+export async function query<T extends pg.QueryResultRow = any>(text: string, params?: any[]): Promise<pg.QueryResult<T>> {
   const start = Date.now();
-  const res = await pool.query(text, params);
+  const res = await pool.query<T>(text, params);
   const duration = Date.now() - start;
   if (process.env.NODE_ENV === 'development') {
     console.log('Executed query', { text: text.slice(0, 50), duration, rows: res.rowCount });

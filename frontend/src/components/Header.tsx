@@ -29,7 +29,6 @@ const Header: React.FC = () => {
           {/* Right side - User avatar */}
           <div className="flex items-center">
             <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center text-white font-medium text-xs sm:text-sm">
-              Mt
             </div>
           </div>
         </div>

@@ -100,12 +100,25 @@ export async function createRecommendations(
   }
 }
 
+interface AnalysisResultRow {
+  id: string;
+  manuscript_id: string;
+  suggested_keywords: string[];
+  analysis_notes: string | null;
+  created_at: Date;
+  manuscript_title: string;
+  abstract: string | null;
+  file_name: string | null;
+  file_type: string | null;
+  manuscript_created_at: Date;
+}
+
 export async function getAnalysisWithRecommendations(analysisId: string): Promise<{
   analysis: AnalysisResult;
   manuscript: Manuscript;
   recommendations: Recommendation[];
 } | null> {
-  const analysisResult = await query<AnalysisResult & Manuscript>(
+  const analysisResult = await query<AnalysisResultRow>(
     `SELECT a.*, m.title as manuscript_title, m.abstract, m.file_name, m.file_type, m.created_at as manuscript_created_at
      FROM analysis_results a
      JOIN manuscripts m ON a.manuscript_id = m.id

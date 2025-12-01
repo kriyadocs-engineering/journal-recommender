@@ -347,7 +347,7 @@ const RecommendationReport: React.FC<RecommendationReportProps> = ({
       {/* Footer Note */}
       <div className="bg-gray-50 rounded-xl border border-gray-200 p-4 sm:p-6 text-center">
         <p className="text-xs sm:text-sm text-gray-500">
-          These recommendations are generated based on AI analysis of your manuscript's title and abstract
+          These recommendations are generated based on keyword matching analysis of your manuscript's title and abstract
           against journal scope definitions. We recommend reviewing each journal's detailed submission
           guidelines before submitting.
         </p>

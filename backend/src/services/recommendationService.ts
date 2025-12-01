@@ -36,13 +36,16 @@ export interface RecommendationResult {
     matchScore: number;
     journal: {
       id: string;
+      source_id: string;
       title: string;
       publisher: string;
       sjr: number | null;
-      sjrQuartile: string | null;
-      hIndex: number | null;
-      openAccess: boolean;
-      scope: string | null;
+      sjr_quartile: string | null;
+      h_index: number | null;
+      citations_per_doc: number | null;
+      open_access: boolean;
+      scope_text: string | null;
+      areas: string[];
     };
     matchReason: string;
     pros: string[];

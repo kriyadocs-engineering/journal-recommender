@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -18,6 +16,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
 
   backend:
     build:
@@ -25,34 +24,28 @@ services:
       dockerfile: Dockerfile
     container_name: journal_recommender_api
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
       PORT: 3001
       DATABASE_URL: postgresql://journal_user:journal_pass_2024@postgres:5432/journal_recommender
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
     ports:
       - "3001:3001"
-    volumes:
-      - ./backend/src:/app/src
-      - ./data:/app/data
     depends_on:
       postgres:
         condition: service_healthy
-    command: npm run dev
+    restart: unless-stopped
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:3001
     container_name: journal_recommender_frontend
-    environment:
-      VITE_API_URL: http://localhost:3001
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend/src:/app/src
+      - "80:80"
     depends_on:
       - backend
-    command: npm run dev -- --host
+    restart: unless-stopped
 
 volumes:
   postgres_data:
