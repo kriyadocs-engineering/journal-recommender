@@ -191,16 +191,7 @@ create_task_definitions() {
                     {\"name\": \"NODE_ENV\", \"value\": \"production\"},
                     {\"name\": \"PORT\", \"value\": \"3001\"},
                     {\"name\": \"DATABASE_URL\", \"value\": \"${DATABASE_URL}\"}
-                ],
-                \"logConfiguration\": {
-                    \"logDriver\": \"awslogs\",
-                    \"options\": {
-                        \"awslogs-group\": \"/ecs/${ECS_SERVICE_BACKEND}\",
-                        \"awslogs-region\": \"${AWS_DEFAULT_REGION}\",
-                        \"awslogs-stream-prefix\": \"ecs\",
-                        \"awslogs-create-group\": \"true\"
-                    }
-                }
+                ]
             }
         ]
     }" >/dev/null
@@ -227,16 +218,7 @@ create_task_definitions() {
                 ],
                 \"environment\": [
                     {\"name\": \"API_URL\", \"value\": \"${API_URL}\"}
-                ],
-                \"logConfiguration\": {
-                    \"logDriver\": \"awslogs\",
-                    \"options\": {
-                        \"awslogs-group\": \"/ecs/${ECS_SERVICE_FRONTEND}\",
-                        \"awslogs-region\": \"${AWS_DEFAULT_REGION}\",
-                        \"awslogs-stream-prefix\": \"ecs\",
-                        \"awslogs-create-group\": \"true\"
-                    }
-                }
+                ]
             }
         ]
     }" >/dev/null
