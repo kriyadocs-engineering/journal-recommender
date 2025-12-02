@@ -4,15 +4,27 @@ import {
   FileUpload,
   AnalysisProgress,
   RecommendationReport,
-  PreAnalysisFilters
+  PreAnalysisFilters,
+  Login
 } from './components';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import type { AnalysisStep, RecommendationReport as Report } from './types';
 import { uploadAndAnalyze, analysisSteps, type RecommendationFilters } from './services/api';
 import { Sparkles, BookOpen, Target, Zap } from 'lucide-react';
 
 type AppState = 'idle' | 'analyzing' | 'complete';
 
-function App() {
+function AppContent() {
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return <Login />;
+  }
+
+  return <MainApp />;
+}
+
+function MainApp() {
   const [appState, setAppState] = useState<AppState>('idle');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
@@ -146,7 +158,7 @@ function App() {
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Smart Matching</h3>
                   <p className="text-xs sm:text-sm text-gray-500">
-                    AI analyzes your manuscript's title and abstract against comprehensive journal scope definitions
+                    Analyzes your manuscript's title and abstract against comprehensive journal scope definitions
                   </p>
                 </div>
 
@@ -195,7 +207,7 @@ function App() {
                     </div>
                     <h4 className="font-medium text-gray-900 mb-1 text-sm sm:text-base">Analyze</h4>
                     <p className="text-xs sm:text-sm text-gray-500">
-                      AI extracts key info
+                      Extract key info
                     </p>
                   </div>
 
@@ -248,6 +260,14 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

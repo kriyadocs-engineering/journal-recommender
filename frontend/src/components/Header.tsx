@@ -1,8 +1,10 @@
 import React from 'react';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, LogOut } from 'lucide-react';
 import kriyadocsLogo from '../assets/kriyadocs-logo.svg';
+import { useAuth } from '../context/AuthContext';
 
 const Header: React.FC = () => {
+  const { logout } = useAuth();
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,10 +28,15 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* Right side - User avatar */}
+          {/* Right side - Sign out button */}
           <div className="flex items-center">
-            <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center text-white font-medium text-xs sm:text-sm">
-            </div>
+            <button
+              onClick={logout}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="hidden sm:inline">Sign Out</span>
+            </button>
           </div>
         </div>
       </div>

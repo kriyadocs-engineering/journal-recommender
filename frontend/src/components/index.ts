@@ -5,3 +5,4 @@ export { default as RecommendationCard } from './RecommendationCard';
 export { default as RecommendationReport } from './RecommendationReport';
 export { default as FilterPanel } from './FilterPanel';
 export { default as PreAnalysisFilters } from './PreAnalysisFilters';
+export { Login } from './Login';

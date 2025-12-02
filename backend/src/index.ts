@@ -63,6 +63,25 @@ const upload = multer({
 
 // Routes
 
+// Authentication
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body;
+
+  const validEmail = process.env.AUTH_EMAIL;
+  const validPassword = process.env.AUTH_PASSWORD;
+
+  if (!validEmail || !validPassword) {
+    console.error('AUTH_EMAIL or AUTH_PASSWORD not configured');
+    return res.status(500).json({ success: false, error: 'Authentication not configured' });
+  }
+
+  if (email === validEmail && password === validPassword) {
+    return res.json({ success: true, message: 'Login successful' });
+  }
+
+  return res.status(401).json({ success: false, error: 'Invalid credentials' });
+});
+
 // Health check
 app.get('/api/health', async (req, res) => {
   const dbConnected = await testConnection();
