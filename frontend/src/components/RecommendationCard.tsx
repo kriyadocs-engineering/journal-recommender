@@ -9,7 +9,8 @@ import {
   Unlock,
   Lock,
   Globe,
-  Calendar
+  Calendar,
+  ExternalLink
 } from 'lucide-react';
 import type { JournalRecommendation } from '../types';
 
@@ -240,6 +241,18 @@ const RecommendationCard: React.FC<RecommendationCardProps> = ({
               </div>
             )}
 
+            {/* Action Button */}
+            <div className="pt-3 sm:pt-4 border-t border-gray-200">
+              <a
+                href={journal.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-violet-600 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors w-full sm:w-auto justify-center sm:justify-start"
+              >
+                Visit Journal Website
+                <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              </a>
+            </div>
           </div>
         )}
       </div>

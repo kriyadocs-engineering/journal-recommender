@@ -47,16 +47,9 @@ export interface PaginatedResponse<T> {
   };
 }
 
-// Generate journal website URL using ISSN portal (works for all publishers)
-function getJournalWebsiteUrl(issns: string[] | undefined, title: string): string {
-  // Use ISSN portal if ISSN is available - this is publisher-agnostic
-  if (issns && issns.length > 0) {
-    // Clean the ISSN (remove any spaces) and use the first one
-    const cleanIssn = issns[0].replace(/\s/g, '');
-    return `https://portal.issn.org/resource/ISSN/${cleanIssn}`;
-  }
-  // Fallback to Google Scholar search by journal title
-  return `https://scholar.google.com/scholar?q="${encodeURIComponent(title)}"`;
+// Generate journal website URL using Scimago journal search
+function getJournalWebsiteUrl(sourceId: string): string {
+  return `https://www.scimagojr.com/journalsearch.php?q=${sourceId}&tip=sid&clean=0`;
 }
 
 // Transform backend journal to frontend format
@@ -76,7 +69,7 @@ function transformJournal(backendJournal: any): Journal {
     openAccess: backendJournal.open_access || false,
     reviewTime: '6-8 weeks',
     acceptanceRate: 25 + Math.floor(Math.random() * 30),
-    website: getJournalWebsiteUrl(backendJournal.issns, backendJournal.title),
+    website: getJournalWebsiteUrl(backendJournal.source_id),
     language: 'English',
     frequency: 'Monthly',
     indexedIn: ['Scimago'],  // Data source: Scimago Journal Rankings
