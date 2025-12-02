@@ -243,7 +243,7 @@ create_task_definitions() {
     log_info "Registered frontend task definition: ${ECS_SERVICE_FRONTEND}"
 }
 
-# Setup ALB target groups
+# Setup ALB target groups and listener rules
 setup_alb_target_groups() {
     log_info "Setting up ALB target groups..."
 
@@ -251,7 +251,7 @@ setup_alb_target_groups() {
     BACKEND_TG_NAME="${ECS_SERVICE_BACKEND}-tg"
     FRONTEND_TG_NAME="${ECS_SERVICE_FRONTEND}-tg"
 
-    # Get VPC ID from ALB
+    # Get ALB info
     ALB_ARN=$(aws_cli elbv2 describe-load-balancers --names "${ALB_NAME}" --query "LoadBalancers[0].LoadBalancerArn" --output text)
     VPC_ID=$(aws_cli elbv2 describe-load-balancers --names "${ALB_NAME}" --query "LoadBalancers[0].VpcId" --output text)
 
@@ -261,32 +261,84 @@ setup_alb_target_groups() {
     # Create backend target group
     if aws_cli elbv2 describe-target-groups --names "${BACKEND_TG_NAME}" >/dev/null 2>&1; then
         log_warn "Backend target group already exists: ${BACKEND_TG_NAME}"
+        BACKEND_TG_ARN=$(aws_cli elbv2 describe-target-groups --names "${BACKEND_TG_NAME}" --query "TargetGroups[0].TargetGroupArn" --output text)
     else
-        aws_cli elbv2 create-target-group \
+        BACKEND_TG_ARN=$(aws_cli elbv2 create-target-group \
             --name "${BACKEND_TG_NAME}" \
             --protocol HTTP \
             --port 3001 \
             --vpc-id "$VPC_ID" \
             --target-type ip \
             --health-check-path "/api/health" \
-            --health-check-interval-seconds 30 >/dev/null
+            --health-check-interval-seconds 30 \
+            --query "TargetGroups[0].TargetGroupArn" --output text)
         log_info "Created backend target group: ${BACKEND_TG_NAME}"
     fi
 
     # Create frontend target group
     if aws_cli elbv2 describe-target-groups --names "${FRONTEND_TG_NAME}" >/dev/null 2>&1; then
         log_warn "Frontend target group already exists: ${FRONTEND_TG_NAME}"
+        FRONTEND_TG_ARN=$(aws_cli elbv2 describe-target-groups --names "${FRONTEND_TG_NAME}" --query "TargetGroups[0].TargetGroupArn" --output text)
     else
-        aws_cli elbv2 create-target-group \
+        FRONTEND_TG_ARN=$(aws_cli elbv2 create-target-group \
             --name "${FRONTEND_TG_NAME}" \
             --protocol HTTP \
             --port 80 \
             --vpc-id "$VPC_ID" \
             --target-type ip \
             --health-check-path "/health" \
-            --health-check-interval-seconds 30 >/dev/null
+            --health-check-interval-seconds 30 \
+            --query "TargetGroups[0].TargetGroupArn" --output text)
         log_info "Created frontend target group: ${FRONTEND_TG_NAME}"
     fi
+
+    # Get or create HTTPS listener (port 443)
+    HTTPS_LISTENER_ARN=$(aws_cli elbv2 describe-listeners --load-balancer-arn "$ALB_ARN" --query "Listeners[?Port==\`443\`].ListenerArn" --output text 2>/dev/null)
+
+    if [ -z "$HTTPS_LISTENER_ARN" ] || [ "$HTTPS_LISTENER_ARN" == "None" ]; then
+        # Try HTTP listener (port 80) as fallback
+        HTTP_LISTENER_ARN=$(aws_cli elbv2 describe-listeners --load-balancer-arn "$ALB_ARN" --query "Listeners[?Port==\`80\`].ListenerArn" --output text 2>/dev/null)
+        LISTENER_ARN="$HTTP_LISTENER_ARN"
+        log_info "Using HTTP listener (port 80)"
+    else
+        LISTENER_ARN="$HTTPS_LISTENER_ARN"
+        log_info "Using HTTPS listener (port 443)"
+    fi
+
+    if [ -z "$LISTENER_ARN" ] || [ "$LISTENER_ARN" == "None" ]; then
+        log_error "No listener found on ALB. Please create a listener first."
+        exit 1
+    fi
+
+    # Add listener rule for API paths -> backend (priority 100)
+    EXISTING_RULE=$(aws_cli elbv2 describe-rules --listener-arn "$LISTENER_ARN" --query "Rules[?Conditions[?Field=='path-pattern' && Values[?contains(@, '/api/*')]]].RuleArn" --output text 2>/dev/null)
+
+    if [ -z "$EXISTING_RULE" ] || [ "$EXISTING_RULE" == "None" ]; then
+        log_info "Creating listener rule for /api/* -> backend"
+        aws_cli elbv2 create-rule \
+            --listener-arn "$LISTENER_ARN" \
+            --priority 100 \
+            --conditions "Field=path-pattern,Values=/api/*" \
+            --actions "Type=forward,TargetGroupArn=$BACKEND_TG_ARN" >/dev/null
+    else
+        log_warn "Listener rule for /api/* already exists"
+    fi
+
+    # Add listener rule for frontend (default or lower priority)
+    EXISTING_FRONTEND_RULE=$(aws_cli elbv2 describe-rules --listener-arn "$LISTENER_ARN" --query "Rules[?Actions[?TargetGroupArn=='${FRONTEND_TG_ARN}']].RuleArn" --output text 2>/dev/null)
+
+    if [ -z "$EXISTING_FRONTEND_RULE" ] || [ "$EXISTING_FRONTEND_RULE" == "None" ]; then
+        log_info "Creating listener rule for /* -> frontend"
+        aws_cli elbv2 create-rule \
+            --listener-arn "$LISTENER_ARN" \
+            --priority 200 \
+            --conditions "Field=path-pattern,Values=/*" \
+            --actions "Type=forward,TargetGroupArn=$FRONTEND_TG_ARN" >/dev/null
+    else
+        log_warn "Listener rule for frontend already exists"
+    fi
+
+    log_info "ALB target groups and listener rules configured"
 }
 
 # Create/Update ECS services
