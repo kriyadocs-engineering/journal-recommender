@@ -24,7 +24,7 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <div className="flex items-center gap-2 text-gray-700">
               <BookOpen className="h-5 w-5 text-violet-600" />
-              <span className="font-medium hidden sm:inline">Journal Scope Matcher</span>
+              <span className="font-medium hidden sm:inline">Journal Recommendation System</span>
             </div>
           </div>
 

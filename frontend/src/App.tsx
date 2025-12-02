@@ -97,7 +97,7 @@ function MainApp() {
                   <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
                 <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
-                  Journal Scope Matcher
+                  Journal Recommendation System
                 </h1>
               </div>
               <p className="text-sm sm:text-base text-gray-500 ml-8 sm:ml-12">
