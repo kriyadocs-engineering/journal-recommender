@@ -102,12 +102,12 @@ create_ecr_repos() {
     log_info "Creating ECR repositories..."
 
     for repo in "$ECR_BACKEND_REPO" "$ECR_FRONTEND_REPO"; do
-        if aws_cli ecr describe-repositories --repository-names "$repo" 2>/dev/null; then
+        if aws_cli ecr describe-repositories --repository-names "$repo" >/dev/null 2>&1; then
             log_warn "Repository $repo already exists"
         else
             aws_cli ecr create-repository \
                 --repository-name "$repo" \
-                --image-scanning-configuration scanOnPush=false
+                --image-scanning-configuration scanOnPush=false >/dev/null
             log_info "Created repository: $repo"
         fi
     done
@@ -154,12 +154,12 @@ push_images() {
 create_ecs_cluster() {
     log_info "Creating ECS cluster..."
 
-    CLUSTER_NAME="${ECS_CLUSTER:-journal-recommender-cluster}"
+    CLUSTER_NAME="${ECS_CLUSTER:-jrs-cluster}"
 
-    if aws_cli ecs describe-clusters --clusters "$CLUSTER_NAME" --query "clusters[?status=='ACTIVE']" | grep -q "$CLUSTER_NAME"; then
+    if aws_cli ecs describe-clusters --clusters "$CLUSTER_NAME" --query "clusters[?status=='ACTIVE'].clusterName" --output text 2>/dev/null | grep -q "$CLUSTER_NAME"; then
         log_warn "Cluster $CLUSTER_NAME already exists"
     else
-        aws_cli ecs create-cluster --cluster-name "$CLUSTER_NAME"
+        aws_cli ecs create-cluster --cluster-name "$CLUSTER_NAME" >/dev/null
         log_info "Created cluster: $CLUSTER_NAME"
     fi
 }
@@ -169,7 +169,10 @@ create_task_definitions() {
     log_info "Creating ECS task definitions..."
 
     # Backend task definition
-    cat > /tmp/backend-task-def.json << EOF
+    TASK_DEF_DIR="$PROJECT_ROOT/.task-definitions"
+    mkdir -p "$TASK_DEF_DIR"
+
+    cat > "$TASK_DEF_DIR/backend-task-def.json" << EOF
 {
     "family": "journal-recommender-backend",
     "networkMode": "awsvpc",
@@ -207,11 +210,11 @@ create_task_definitions() {
 }
 EOF
 
-    aws_cli ecs register-task-definition --cli-input-json file:///tmp/backend-task-def.json
+    aws_cli ecs register-task-definition --cli-input-json "file://$TASK_DEF_DIR/backend-task-def.json" >/dev/null
     log_info "Registered backend task definition"
 
     # Frontend task definition
-    cat > /tmp/frontend-task-def.json << EOF
+    cat > "$TASK_DEF_DIR/frontend-task-def.json" << EOF
 {
     "family": "journal-recommender-frontend",
     "networkMode": "awsvpc",
@@ -247,10 +250,11 @@ EOF
 }
 EOF
 
-    aws_cli ecs register-task-definition --cli-input-json file:///tmp/frontend-task-def.json
+    aws_cli ecs register-task-definition --cli-input-json "file://$TASK_DEF_DIR/frontend-task-def.json" >/dev/null
     log_info "Registered frontend task definition"
 
-    rm -f /tmp/backend-task-def.json /tmp/frontend-task-def.json
+    # Keep task definitions for reference (gitignored)
+    log_info "Task definitions saved to $TASK_DEF_DIR/"
 }
 
 # Setup ALB target groups
@@ -265,7 +269,9 @@ setup_alb_target_groups() {
     log_info "VPC: $VPC_ID"
 
     # Create backend target group
-    if ! aws_cli elbv2 describe-target-groups --names "journal-rec-backend-tg" 2>/dev/null; then
+    if aws_cli elbv2 describe-target-groups --names "journal-rec-backend-tg" >/dev/null 2>&1; then
+        log_warn "Backend target group already exists"
+    else
         aws_cli elbv2 create-target-group \
             --name "journal-rec-backend-tg" \
             --protocol HTTP \
@@ -273,14 +279,14 @@ setup_alb_target_groups() {
             --vpc-id "$VPC_ID" \
             --target-type ip \
             --health-check-path "/api/health" \
-            --health-check-interval-seconds 30
+            --health-check-interval-seconds 30 >/dev/null
         log_info "Created backend target group"
-    else
-        log_warn "Backend target group already exists"
     fi
 
     # Create frontend target group
-    if ! aws_cli elbv2 describe-target-groups --names "journal-rec-frontend-tg" 2>/dev/null; then
+    if aws_cli elbv2 describe-target-groups --names "journal-rec-frontend-tg" >/dev/null 2>&1; then
+        log_warn "Frontend target group already exists"
+    else
         aws_cli elbv2 create-target-group \
             --name "journal-rec-frontend-tg" \
             --protocol HTTP \
@@ -288,10 +294,8 @@ setup_alb_target_groups() {
             --vpc-id "$VPC_ID" \
             --target-type ip \
             --health-check-path "/health" \
-            --health-check-interval-seconds 30
+            --health-check-interval-seconds 30 >/dev/null
         log_info "Created frontend target group"
-    else
-        log_warn "Frontend target group already exists"
     fi
 }
 
@@ -299,9 +303,9 @@ setup_alb_target_groups() {
 create_ecs_services() {
     log_info "Creating/Updating ECS services..."
 
-    CLUSTER_NAME="${ECS_CLUSTER:-journal-recommender-cluster}"
+    CLUSTER_NAME="${ECS_CLUSTER:-jrs-cluster}"
 
-    # Get subnet and security group info (you may need to customize these)
+    # Get subnet and security group info
     VPC_ID=$(aws_cli elbv2 describe-load-balancers --names "${ALB_NAME:-bibmanager-alb}" --query "LoadBalancers[0].VpcId" --output text)
     SUBNETS=$(aws_cli ec2 describe-subnets --filters "Name=vpc-id,Values=$VPC_ID" --query "Subnets[?MapPublicIpOnLaunch==\`true\`].SubnetId" --output text | tr '\t' ',')
 

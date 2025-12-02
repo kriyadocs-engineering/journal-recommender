@@ -16,6 +16,9 @@ build/
 .env.production.local
 .env.deploy
 
+# Deployment artifacts
+.task-definitions/
+
 # Logs
 logs
 *.log
