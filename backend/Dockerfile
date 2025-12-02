@@ -1,3 +1,6 @@
+# Backend Dockerfile for ECS Production Deployment
+# Optimized Alpine-based Node.js image
+
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -15,29 +18,40 @@ FROM node:20-alpine AS production
 
 WORKDIR /app
 
+# Install dumb-init for proper signal handling
+RUN apk add --no-cache dumb-init
+
 # Copy package files and install production dependencies only
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci --omit=dev && npm cache clean --force
 
 # Copy built files from builder
 COPY --from=builder /app/dist ./dist
 
-# Create uploads directory
-RUN mkdir -p uploads
+# Create uploads directory with proper permissions
+RUN mkdir -p uploads && chown -R node:node uploads
 
-# Set environment
-ENV NODE_ENV=production
+# Set environment variables (these should be overridden at runtime)
+ENV NODE_ENV=production \
+    PORT=3001
 
 # Expose port
 EXPOSE 3001
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3001/api/health || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/api/health || exit 1
 
 # Run as non-root user
-RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
-USER nodejs
+USER node
+
+# Use dumb-init for proper PID 1 behavior
+ENTRYPOINT ["dumb-init", "--"]
 
 # Start the server
 CMD ["node", "dist/index.js"]
+
+# Labels for container registry
+LABEL org.opencontainers.image.source="https://github.com/Manikandan24-kr/journal-recommender" \
+      org.opencontainers.image.description="Journal Recommender Backend API" \
+      org.opencontainers.image.title="journal-recommender-backend"
